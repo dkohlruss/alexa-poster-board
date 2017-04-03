@@ -4,7 +4,6 @@ const constants = require('../constants/constants');
 const getId = require('../helpers/getId');
 
 const ping = '<audio src="https://s3.amazonaws.com/dkohlruss/ping.mp3" />';
-const secrets = require('../secrets/secrets');
 
 // DB constants
 const AWS1 = require('aws-sdk');
