@@ -1,6 +1,7 @@
-node_modules
+/*/node_modules
 lambda.zip
-lambda/lambda.zip
-audio
-backend
-photo
+/lambda/lambda.zip
+/audio
+/backend
+/photo
+/lambda/constants/secrets.js

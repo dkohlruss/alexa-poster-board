@@ -1,4 +1,5 @@
 const request = require('request-promise');
+const secrets = require('../constants/secrets');
 
 const getId = function(increase) {
   return new Promise((resolve, reject) => {
@@ -9,8 +10,8 @@ const getId = function(increase) {
         value: increase
       },
       headers: {
-        'X-Sttc-URN': SECRETURN,
-        'X-Sttc-Token': SECRETTOKEN
+        'X-Sttc-URN': secrets.urn,
+        'X-Sttc-Token': secrets.token
       }
     })
     .then((response) => {
