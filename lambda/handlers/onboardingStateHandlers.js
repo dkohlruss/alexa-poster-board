@@ -32,8 +32,6 @@ const onboardingHandlers = Alexa.CreateStateHandler(constants.states.ONBOARDING,
 
           this.attributes['area'] = setUserLocation(locationData);
 
-          console.log('bork bork' + this.attributes['postal']);
-
           this.handler.state = constants.states.TUTORIAL;
           this.emitWithState('LaunchRequest');
         }).catch((err) => {
