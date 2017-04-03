@@ -1,0 +1,64 @@
+{
+  "intents": [
+    {
+      "intent": "AboutIntent"
+    },
+    {
+      "intent": "SonsNameIntent"
+    },
+    {
+      "intent": "ListenIntent"
+    },
+    {
+      "intent": "MenuIntent"
+    },
+    {
+      "intent": "RerecordIntent"
+    },
+    {
+      "intent": "SaveIntent"
+    },
+    {
+      "intent": "StatisticsIntent"
+    },
+    {
+      "intent": "SubmitIntent"
+    },
+    {
+      "intent": "SkippedListenIntent"
+    },
+    {
+      "intent": "TutorialIntent"
+    },
+    {
+      "intent": "UpVotingIntent"
+    },
+    {
+      "intent": "DownVotingIntent"
+    },
+    {
+      "intent": "TutorialContinueIntent"
+    },
+    {
+      "intent": "InputIntent",
+      "slots": [
+        {
+          "name": "input",
+          "type": "catchAll"
+        }
+      ]
+    },
+    {
+      "intent": "TutorialSkipIntent"
+    },
+    {
+      "intent": "AMAZON.StopIntent"
+    },
+    {
+      "intent": "AMAZON.CancelIntent"
+    },
+    {
+      "intent": "AMAZON.HelpIntent"
+    }
+  ]
+}

@@ -1,0 +1,90 @@
+ListenIntent listen
+ListenIntent hear
+ListenIntent listen to a bort
+ListenIntent listen to a message
+ListenIntent listen to a secret
+ListenIntent listen to one
+ListenIntent hear a confession
+ListenIntent hear a secret
+ListenIntent i want to hear a bort
+ListenIntent i want to hear a secret
+ListenIntent i want to hear a message
+ListenIntent i want to listen
+ListenIntent i want to hear
+
+StatisticsIntent statistics
+StatisticsIntent my statistics
+StatisticsIntent i want to know my statistics
+StatisticsIntent stats
+StatisticsIntent my stats
+StatisticsIntent i want to know my stats
+StatisticsIntent my account
+StatisticsIntent account statistics
+StatisticsIntent account stats
+
+UpVotingIntent up
+UpVotingIntent thumbs up
+UpVotingIntent I like it
+UpVotingIntent good
+UpVotingIntent cool
+UpVotingIntent upvote
+
+DownVotingIntent downvote
+DownVotingIntent down
+DownVotingIntent thumbs down
+DownVotingIntent I don't like it
+DownVotingIntent I hate it
+DownVotingIntent bad
+DownVotingIntent dumb
+
+TutorialContinueIntent continue
+TutorialContinueIntent continue the tutorial
+
+SonsNameIntent my sons name is also Bort
+
+SubmitIntent say a Bort
+SubmitIntent tell a Bort
+SubmitIntent Bort
+SubmitIntent submit a Bort
+SubmitIntent submit my Bort
+SubmitIntent submit
+SubmitIntent submit something
+
+TutorialSkipIntent skip
+TutorialSkipIntent skip this
+TutorialSkipIntent skip the tutorial
+TutorialSkipIntent skip it
+TutorialSkipIntent skip this tutorial
+
+AboutIntent about
+AboutIntent about this skill
+AboutIntent who made this
+AboutIntent who made this skill
+AboutIntent who is the developer
+AboutIntent tell me about this skill
+
+SaveIntent save
+SaveIntent save this
+SaveIntent send this to the server
+SaveIntent save it
+SaveIntent keep it
+
+RerecordIntent record again
+RerecordIntent try again
+RerecordIntent rerecord
+RerecordIntent record something different
+RerecordIntent record another
+
+MenuIntent main menu
+MenuIntent go back
+MenuIntent go back to the menu
+MenuIntent return to the menu
+MenuIntent start over
+
+TutorialIntent tutorial
+TutorialIntent i need a tutorial
+TutorialIntent is there a tutorial
+TutorialIntent teach me to use this
+TutorialIntent teach me
+
+InputIntent {input}
