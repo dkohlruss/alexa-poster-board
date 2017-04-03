@@ -17,7 +17,7 @@ var constants = Object.freeze({
     LISTENING: '_LISTENING',
     VOTING: '_VOTING',
     SAVING: '_SAVING'
-  };
+  },
 
   key: SECRETEKEYGOESHERE
 });
