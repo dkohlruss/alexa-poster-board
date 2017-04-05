@@ -14,6 +14,7 @@ const onboardingHandlers = Alexa.CreateStateHandler(constants.states.ONBOARDING,
     this.attributes['recorded'] = [];
     let deviceId = this.event.context.System.device.deviceId;
     let consentToken = this.event.context.System.user.permissions.consentToken;
+
     if (!consentToken) {
       this.emit(':tellWithPermissionCard', 'Please enable Location permissions in the Amazon Alexa app to use this skill.');
     }
@@ -24,25 +25,24 @@ const onboardingHandlers = Alexa.CreateStateHandler(constants.states.ONBOARDING,
         this.emit(':tell', `It looks like you haven't set your address.  You will need to do so in order to use this skill.`);
       }
 
-      if (!this.attributes['address'] || this.attributes['address'] !== fullAddress) {
         this.attributes['address'] = fullAddress;
 
         getLocationData(fullAddress).then((result) => {
-                let locationData = {
-                  bounds: result.results[0].geometry.bounds,
-                  location: result.results[0].geometry.location
-                };
+            let locationData = {
+              bounds: result.results[0].geometry.bounds,
+              location: result.results[0].geometry.location
+            };
 
-                this.attributes['lat'] = locationData.location.lat;
-                this.attributes['lng'] = locationData.location.lng;
+              this.attributes['lat'] = locationData.location.lat;
+              this.attributes['lng'] = locationData.location.lng;
 
-                this.attributes['area'] = setUserLocation(locationData);
+              this.attributes['area'] = setUserLocation(locationData);
 
-                this.handler.state = constants.states.TUTORIAL;
-                this.emitWithState('LaunchRequest');
-              }).catch((err) => {
-                console.log(err);
-              });
+              this.handler.state = constants.states.TUTORIAL;
+              this.emitWithState('LaunchRequest');
+            }).catch((err) => {
+              console.log(err);
+            });
     }).catch((err) => {
       this.emit(':tell', 'Sorry, there was a problem getting your address. Please try again later.');
       console.log(err);
