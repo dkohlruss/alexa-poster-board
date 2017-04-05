@@ -1,6 +1,5 @@
 const Alexa = require('alexa-sdk');
 const constants = require('../constants/constants');
-const getPostal = require('../helpers/getPostal');
 const getAddress = require('../helpers/getAddress');
 const getLocationData = require('../helpers/getLocationData');
 const setUserLocation = require('../helpers/setUserLocation');
@@ -16,10 +15,8 @@ const mainStateHandlers = Alexa.CreateStateHandler(constants.states.MAIN, {
     let deviceId = this.event.context.System.device.deviceId;
     let consentToken = this.event.context.System.user.permissions.consentToken;
 
-    console.log(consentToken);
-
-    if (!consentToken || consentToken === undefined) {
-      this.emit(':tell', 'Please enable Location permissions for this skill in the Amazon Alexa app.');
+    if (!consentToken) {
+      this.emit(':tellWithPermissionCard', 'Please enable Location permissions for this skill in the Amazon Alexa app.', constants.ALL_ADDRESS_PERMISSION);
     }
 
     getAddress(deviceId, consentToken).then((res) => {
@@ -29,24 +26,29 @@ const mainStateHandlers = Alexa.CreateStateHandler(constants.states.MAIN, {
       }
 
       if (!this.attributes['address'] || this.attributes['address'] !== fullAddress) {
-        this.attributes['address'] = fullAddress;
-
-        getLocationData(fullAddress).then((result) => {
-                let locationData = {
-                  bounds: result.results[0].geometry.bounds,
-                  location: result.results[0].geometry.location
-                };
-
+        let fullAddress = setAddress(res);
+        if (!fullAddress) {
+          this.emit(':tell', `It looks like you haven't set your address.  You will need to do so in order to use this skill.`);
+        } else {
+          this.attributes['address'] = fullAddress;
+          getLocationData(fullAddress).then((result) => {
+              let locationData = {
+                bounds: result.results[0].geometry.bounds,
+                location: result.results[0].geometry.location
+              };
                 this.attributes['lat'] = locationData.location.lat;
                 this.attributes['lng'] = locationData.location.lng;
+
+
 
                 this.attributes['area'] = setUserLocation(locationData);
 
                 this.emit(':ask', `Welcome to Bort. Would you like to listen to a popular Bort, submit a new Bort,
                       or get help with additional options?`, `You can listen to a Bort, submit a Bort, or ask for help.`);
-        }).catch((err) => {
-          console.log(err);
-        });
+              }).catch((err) => {
+                console.log(err);
+              }); // End of getLocation Promise
+          }
       } else {
         this.emit(':ask', `Welcome to Bort. Would you like to listen to a popular Bort, submit a new Bort,
               or get help with additional options?`, `You can listen to a Bort, submit a Bort, or ask for help.`);

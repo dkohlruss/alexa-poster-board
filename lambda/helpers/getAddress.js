@@ -12,7 +12,7 @@ const getAddress = function(deviceId, token) {
       }
     })
     .then((response, body) => {
-      resolve(response);
+      resolve(JSON.parse(response));
     })
     .catch((err) => {
       reject(err);

@@ -17,7 +17,9 @@ var constants = Object.freeze({
     LISTENING: '_LISTENING',
     VOTING: '_VOTING',
     SAVING: '_SAVING'
-  }
+  },
+
+  ALL_ADDRESS_PERMISSION: ['read::alexa:device:all:address']
 });
 
 module.exports = constants;
