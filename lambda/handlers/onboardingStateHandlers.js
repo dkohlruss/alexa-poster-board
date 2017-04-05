@@ -15,8 +15,8 @@ const onboardingHandlers = Alexa.CreateStateHandler(constants.states.ONBOARDING,
     let deviceId = this.event.context.System.device.deviceId;
     let consentToken = this.event.context.System.user.permissions.consentToken;
 
-    if (!consentToken) {
-      this.emit(':tellWithPermissionCard', 'Please enable Location permissions in the Amazon Alexa app to use this skill.');
+    if (!consentToken || consentToken === undefined) {
+      this.emit(':tell', 'Please enable Location permissions for this skill in the Amazon Alexa app.');
     }
 
     getAddress(deviceId, consentToken).then((res) => {
@@ -44,7 +44,7 @@ const onboardingHandlers = Alexa.CreateStateHandler(constants.states.ONBOARDING,
               console.log(err);
             });
     }).catch((err) => {
-      this.emit(':tell', 'Sorry, there was a problem getting your address. Please try again later.');
+      this.emit(':tell', 'Please check your Location permissions and ensure they are set in the Amazon Alexa app to use this skill.');
       console.log(err);
     });
   },

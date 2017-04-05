@@ -1,7 +1,6 @@
 const request = require('request-promise');
 
 const getAddress = function(deviceId, token) {
-  console.log('token: ' + token);
   let url = `https://api.amazonalexa.com/v1/devices/${deviceId}/settings/address`;
   let auth = `Bearer ${token}`;
   return new Promise((resolve, reject) => {

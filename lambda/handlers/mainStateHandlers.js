@@ -15,8 +15,11 @@ const mainStateHandlers = Alexa.CreateStateHandler(constants.states.MAIN, {
   'LaunchRequest': function() {
     let deviceId = this.event.context.System.device.deviceId;
     let consentToken = this.event.context.System.user.permissions.consentToken;
-    if (!consentToken) {
-      this.emit(':tellWithPermissionCard', 'Please enable Location permissions in the Amazon Alexa app to use this skill.');
+
+    console.log(consentToken);
+
+    if (!consentToken || consentToken === undefined) {
+      this.emit(':tell', 'Please enable Location permissions for this skill in the Amazon Alexa app.');
     }
 
     getAddress(deviceId, consentToken).then((res) => {
@@ -50,7 +53,7 @@ const mainStateHandlers = Alexa.CreateStateHandler(constants.states.MAIN, {
       }
     }).catch((err) => {
       console.log(err);
-      this.emit(':tell', `Sorry, there was a problem retrieving your address. Please try again later.`);
+      this.emit(':tell', 'Please check your Location permissions and ensure they are set in the Amazon Alexa app to use this skill.');
     });
   },
 
