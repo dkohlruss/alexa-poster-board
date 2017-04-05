@@ -1,6 +1,6 @@
 var constants = Object.freeze({
   //App ID TODO: Set Your App ID before publishing
-  appId: '',
+  appId: 'amzn1.ask.skill.5d7df2d1-6622-4bdd-be5a-02283739cdb1',
 
   // DynamoDB Table name
   dynamoDBTableName: 'Confessions',
@@ -17,9 +17,7 @@ var constants = Object.freeze({
     LISTENING: '_LISTENING',
     VOTING: '_VOTING',
     SAVING: '_SAVING'
-  },
-
-  key: SECRETEKEYGOESHERE
+  }
 });
 
 module.exports = constants;

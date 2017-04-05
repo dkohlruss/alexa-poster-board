@@ -1,15 +1,15 @@
 const request = require('request-promise');
 
 const getAddress = function(deviceId, token) {
-
+  console.log('token: ' + token);
   let url = `https://api.amazonalexa.com/v1/devices/${deviceId}/settings/address`;
-  let auth = `Bearer Atc|${token}|`;
+  let auth = `Bearer ${token}`;
   return new Promise((resolve, reject) => {
     request({
       url: url,
       method: 'GET',
-      qs: {
-        'authorization': auth
+      headers: {
+        authorization: auth
       }
     })
     .then((response, body) => {
@@ -20,6 +20,5 @@ const getAddress = function(deviceId, token) {
     });
   });
 }
-
 
 module.exports = getAddress;
