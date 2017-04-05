@@ -2,6 +2,7 @@ const Alexa = require('alexa-sdk');
 const constants = require('../constants/constants');
 const getAddress = require('../helpers/getAddress');
 const getLocationData = require('../helpers/getLocationData');
+const setAddress = require('../helpers/setAddress');
 const setUserLocation = require('../helpers/setUserLocation');
 
 const ping = '<audio src="https://s3.amazonaws.com/dkohlruss/ping.mp3" />';
@@ -20,42 +21,37 @@ const mainStateHandlers = Alexa.CreateStateHandler(constants.states.MAIN, {
     }
 
     getAddress(deviceId, consentToken).then((res) => {
-      let fullAddress = `${res.addressLine1} ${res.addressLine2} ${res.addressLine3} ${res.city} ${res.districtOrCounty} ${res.stateOrRegion} ${res.countryCode}`;
-      if (!fullAddress) {
-        this.emit(':tell', `It looks like you haven't set your address.  You will need to do so in order to use this skill.`);
-      }
-
+      let fullAddress = setAddress(res);
       if (!this.attributes['address'] || this.attributes['address'] !== fullAddress) {
-        let fullAddress = setAddress(res);
         if (!fullAddress) {
           this.emit(':tell', `It looks like you haven't set your address.  You will need to do so in order to use this skill.`);
         } else {
-          this.attributes['address'] = fullAddress;
           getLocationData(fullAddress).then((result) => {
-              let locationData = {
-                bounds: result.results[0].geometry.bounds,
-                location: result.results[0].geometry.location
-              };
-                this.attributes['lat'] = locationData.location.lat;
-                this.attributes['lng'] = locationData.location.lng;
+              let location = result.results[0].geometry.location;
+              let lat = location.lat;
+              let lng = location.lng;
+              let area = setUserLocation(location);
+              this.attributes['address'] = fullAddress;
+              this.attributes['lat'] = lat;
+              this.attributes['lng'] = lng;
+              this.attributes['area'] = area;
 
+              this.emit(':ask', `Welcome to Bort. Would you like to listen to a popular Bort, submit a new Bort,
+                    or get help with additional options?`, `You can listen to a Bort, submit a Bort, or ask for help.`);
 
+            
 
-                this.attributes['area'] = setUserLocation(locationData);
-
-                this.emit(':ask', `Welcome to Bort. Would you like to listen to a popular Bort, submit a new Bort,
-                      or get help with additional options?`, `You can listen to a Bort, submit a Bort, or ask for help.`);
               }).catch((err) => {
                 console.log(err);
               }); // End of getLocation Promise
           }
       } else {
-        this.emit(':ask', `Welcome to Bort. Would you like to listen to a popular Bort, submit a new Bort,
+        this.emit(':ask', `Welcome back to Bort. Would you like to listen to a popular Bort, submit a new Bort,
               or get help with additional options?`, `You can listen to a Bort, submit a Bort, or ask for help.`);
       }
     }).catch((err) => {
       console.log(err);
-      this.emit(':tell', 'Please check your Location permissions and ensure they are set in the Amazon Alexa app to use this skill.');
+      this.emit(':tellWithPermissionCard', 'Please check your Location permissions and ensure they are set in the Amazon Alexa app to use this skill.');
     });
   },
 

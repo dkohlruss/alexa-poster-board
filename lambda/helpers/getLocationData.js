@@ -1,15 +1,14 @@
 const request = require('request-promise');
-const constants = require('../constants/constants');
 const secrets = require('../constants/secrets');
 
-const getLocationData = function(zip) {
+const getLocationData = function(address) {
   return new Promise((resolve, reject) => {
     request({
     url: 'https://maps.googleapis.com/maps/api/geocode/json',
     method: 'POST',
     qs: {
       key: secrets.key,
-      address: zip
+      address
       }
     })
     .then((response) => {
