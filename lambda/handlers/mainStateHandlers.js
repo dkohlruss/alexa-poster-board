@@ -13,18 +13,18 @@ const doc = new AWS1.DynamoDB.DocumentClient({apiVersion: '2012-08-10'});
 const mainStateHandlers = Alexa.CreateStateHandler(constants.states.MAIN, {
 
   'LaunchRequest': function() {
-    if (this.event.session.user.accessToken == undefined) {
-      this.emit(':tellWithLinkAccountCard', `To begin to Bort, please use the companion
-                app to authenticate on Amazon.`);
-    }
-
-    let token = this.event.session.user.accessToken;
-
     let deviceId = this.event.context.System.device.deviceId;
     let consentToken = this.event.context.System.user.permissions.consentToken;
+    if (!consentToken) {
+      this.emit(':tellWithPermissionCard', 'Please enable Location permissions in the Amazon Alexa app to use this skill.');
+    }
 
     getAddress(deviceId, consentToken).then((res) => {
       let fullAddress = `${res.addressLine1} ${res.addressLine2} ${res.addressLine3} ${res.city} ${res.districtOrCounty} ${res.stateOrRegion} ${res.countryCode}`;
+      if (!fullAddress) {
+        this.emit(':tell', `It looks like you haven't set your address.  You will need to do so in order to use this skill.`);
+      }
+
       if (!this.attributes['address'] || this.attributes['address'] !== fullAddress) {
         this.attributes['address'] = fullAddress;
 
@@ -50,40 +50,8 @@ const mainStateHandlers = Alexa.CreateStateHandler(constants.states.MAIN, {
       }
     }).catch((err) => {
       console.log(err);
-      this.emit(':tell', `Sorry, I was unable to get the address of your Alexa device.  Please let me access your
-                registered device address to continue.`);
+      this.emit(':tell', `Sorry, there was a problem retrieving your address. Please try again later.`);
     });
-
-    // getPostal(token).then((postalResponse) => {
-    //   if (!this.attributes['postal'] || this.attributes['postal'] !== postalResponse['postal_code']) {
-    //     getLocationData(postalResponse['postal_code']).then((res) => {
-    //
-    //       this.attributes['postal'] = postalResponse['postal_code'];
-    //
-    //       let locationData = {
-    //         bounds: res.results[0].geometry.bounds,
-    //         location: res.results[0].geometry.location
-    //       };
-    //
-    //       this.attributes['lat'] = locationData.location.lat;
-    //       this.attributes['lng'] = locationData.location.lng;
-    //
-    //       this.attributes['area'] = setUserLocation(locationData);
-    //
-    //       this.emit(':ask', `Welcome to Bort. Would you like to listen to a popular Bort, submit a new Bort,
-    //             or get help with additional options?`, `You can listen to a Bort, submit a Bort, or ask for help.`);
-    //     }).catch((err) => {
-    //       console.log(err);
-    //     });
-    //
-    //   } else {
-    //     this.emit(':ask', `Welcome to Bort. Would you like to listen to a popular Bort, submit a new Bort,
-    //           or get help with additional options?`, `You can listen to a Bort, submit a Bort, or ask for help.`);
-    //   }
-    //
-    // }).catch((err) => {
-    //   console.log(err);
-    // });
   },
 
   'MenuIntent': function() {
