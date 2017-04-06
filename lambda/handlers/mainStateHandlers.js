@@ -38,9 +38,6 @@ const mainStateHandlers = Alexa.CreateStateHandler(constants.states.MAIN, {
 
               this.emit(':ask', `Welcome to Bort. Would you like to listen to a popular Bort, submit a new Bort,
                     or get help with additional options?`, `You can listen to a Bort, submit a Bort, or ask for help.`);
-
-            
-
               }).catch((err) => {
                 console.log(err);
               }); // End of getLocation Promise

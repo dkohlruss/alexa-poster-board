@@ -36,9 +36,9 @@ const votingHandlers = Alexa.CreateStateHandler(constants.states.VOTING, {
             console.log('Update err: ' + JSON.stringify(err, null, 4));
         } else {
             calculateHotness(data);
-            this.handler.state = constants.states.MAIN;
-            this.emit(':ask', `Thanks for voting! Main menu. Would you like to listen to a popular Bort, submit a new Bort,
-                  or get help with additional options?`, `You can listen to a Bort, submit a Bort, or ask for help.`);
+            this.handler.state = constants.states.LISTENING;
+            this.emit(':ask', `Thanks for voting! Main menu. Would you like to listen to another Bort
+                      or return to the main menu?`, `You can listen to a Bort, return to the main menu, or ask for help.`);
         }
     });
   },
@@ -64,9 +64,9 @@ const votingHandlers = Alexa.CreateStateHandler(constants.states.VOTING, {
             console.log('Update err: ' + JSON.stringify(err, null, 4));
         } else {
             calculateHotness(data);
-            this.handler.state = constants.states.MAIN;
-            this.emit(':ask', `Thanks for voting! Main menu. Would you like to listen to a popular Bort, submit a new Bort,
-                  or get help with additional options?`, `You can listen to a Bort, submit a Bort, or ask for help.`);
+            this.handler.state = constants.states.LISTENING;
+            this.emit(':ask', `Thanks for voting! Main menu. Would you like to listen to another Bort
+                      or return to the main menu?`, `You can listen to a Bort, return to the main menu, or ask for help.`);
         }
     });
 
@@ -89,7 +89,8 @@ const votingHandlers = Alexa.CreateStateHandler(constants.states.VOTING, {
   },
 
   'SessionEndedRequest': function() {
-    this.emit(':saveState', false);
+    this.handler.state = constants.states.MAIN;
+    this.emit(':saveState', true);
   },
 
   'AMAZON.HelpIntent': function() {

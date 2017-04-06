@@ -15,8 +15,8 @@ const recordingHandlers = Alexa.CreateStateHandler(constants.states.RECORDING, {
     this.attributes['input'] = input;
 
     this.handler.state = constants.states.SAVING;
-    this.emit(':ask', `The Bort I heard was: ${input}. You can save this, record again, or return
-              to the main menu.`, `You can either save your Bort, record another, or
+    this.emit(':ask', `The Bort I heard was: ${input}. You can save this, <phoneme alphabet="ipa" ph="rəˈkɔrd">record</phoneme> again, or return
+              to the main menu.`, `You can either save your Bort, <phoneme alphabet="ipa" ph="rəˈkɔrd">record</phoneme> again, or
               go back to the main menu.`);
   },
 
