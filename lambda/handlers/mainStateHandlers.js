@@ -38,6 +38,7 @@ const mainStateHandlers = Alexa.CreateStateHandler(constants.states.MAIN, {
 
               this.emit(':ask', `Welcome to Bort. Would you like to listen to a popular Bort, submit a new Bort,
                     or get help with additional options?`, `You can listen to a Bort, submit a Bort, or ask for help.`);
+
               }).catch((err) => {
                 console.log(err);
               }); // End of getLocation Promise
@@ -191,7 +192,7 @@ const mainStateHandlers = Alexa.CreateStateHandler(constants.states.MAIN, {
   'AMAZON.HelpIntent': function() {
     this.emit(':ask', `You are currently in the main menu. You can listen to a Bort, record a Bort,
               go to the tutorial, get your account statistics, find out more about this skill. You
-              can also exit at any time by saying: Stop.`,
+              can also exit at any time by saying: Stop. Which would you like to do?`,
               `You are currently in the main menu. The commands available to you are: listen, submit,
               statistics, tutorial, and about. You can also exit at any time by saying: Stop.`);
   },

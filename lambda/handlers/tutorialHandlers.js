@@ -27,7 +27,7 @@ const tutorialHandlers = Alexa.CreateStateHandler(constants.states.TUTORIAL, {
     this.handler.state = constants.states.TUTCONFESS;
     this.emit(':ask', `You've upvoted this Bort, that increases its overall score and makes it more
                       likely to be heard by others. Now it's time to submit your own Bort, just for fun.  Say something
-                      like <break />Say a Bort<break /> or <break />tell a Bort<break />.`, `To continue, say something
+                      like <break />Submit a Bort<break /> or <break />tell a Bort<break />.`, `To continue, say something
                       like <break />tell a Bort<break /> or <break /> submit my Bort.`);
   },
 
@@ -65,7 +65,11 @@ const tutorialHandlers = Alexa.CreateStateHandler(constants.states.TUTORIAL, {
   },
 
   'AMAZON.HelpIntent': function() {
-    this.emit(':ask', `You are currently in the tutorial. The commands available to you are: listen, skip, continue, up vote, and down vote.`, `The commands available to you are: listen, skip, continue, up vote, and down vote.`);
+    this.emit(':ask', `Bort is an interactive, anonymous, localized messaging system.
+    You are currently in the tutorial. The commands available to you are: listen, skip,
+    continue, up vote, and down vote. You can also exit at any time by saying <break /> stop.
+    Which would you like to do?`, `The commands available to you are: listen, skip, continue,
+    up vote, and down vote. Which would you like to do?`);
   },
 
   'Unhandled': function() {

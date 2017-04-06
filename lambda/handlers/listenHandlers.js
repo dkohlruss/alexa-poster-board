@@ -67,7 +67,7 @@ const listenHandlers = Alexa.CreateStateHandler(constants.states.LISTENING, {
         }
         this.handler.state = constants.states.MAIN;
         this.emit(':ask', `You've listened to all available Borts.  Please try again later.  Main menu:
-                  Would you like to listen to a Bort, submit a Bort, or get help for additional options?`,
+                  Would you like to listen to a Bort, submit a Bort, or get help with additional options?`,
                   `You can listen to a Bort, submit a Bort, or ask for help.`);
       }
     });

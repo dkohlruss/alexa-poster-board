@@ -42,10 +42,10 @@ TutorialContinueIntent continue the tutorial
 
 SonsNameIntent my sons name is also Bort
 
-SubmitIntent say a Bort
-SubmitIntent tell a Bort
+SubmitIntent say a bort
+SubmitIntent tell a bort
 SubmitIntent Bort
-SubmitIntent submit a Bort
+SubmitIntent submit a bort
 SubmitIntent submit my Bort
 SubmitIntent submit
 SubmitIntent submit something
