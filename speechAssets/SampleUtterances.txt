@@ -11,6 +11,10 @@ ListenIntent i want to hear a secret
 ListenIntent i want to hear a message
 ListenIntent i want to listen
 ListenIntent i want to hear
+ListenIntent listen again
+ListenIntent listen to another
+ListenIntent tell me another
+ListenIntent what is the next bort
 
 StatisticsIntent statistics
 StatisticsIntent my statistics
@@ -49,6 +53,10 @@ SubmitIntent submit a bort
 SubmitIntent submit my Bort
 SubmitIntent submit
 SubmitIntent submit something
+SubmitIntent record a bort
+SubmitIntent record a message
+SubmitIntent send a message
+SubmitIntent send a bort
 
 TutorialSkipIntent skip
 TutorialSkipIntent skip this

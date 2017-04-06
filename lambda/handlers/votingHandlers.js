@@ -37,7 +37,7 @@ const votingHandlers = Alexa.CreateStateHandler(constants.states.VOTING, {
         } else {
             calculateHotness(data);
             this.handler.state = constants.states.LISTENING;
-            this.emit(':ask', `Thanks for voting! Main menu. Would you like to listen to another Bort
+            this.emit(':ask', `Thanks for voting! Would you like to listen to another Bort
                       or return to the main menu?`, `You can listen to a Bort, return to the main menu, or ask for help.`);
         }
     });
@@ -65,7 +65,7 @@ const votingHandlers = Alexa.CreateStateHandler(constants.states.VOTING, {
         } else {
             calculateHotness(data);
             this.handler.state = constants.states.LISTENING;
-            this.emit(':ask', `Thanks for voting! Main menu. Would you like to listen to another Bort
+            this.emit(':ask', `Thanks for voting! Would you like to listen to another Bort
                       or return to the main menu?`, `You can listen to a Bort, return to the main menu, or ask for help.`);
         }
     });
