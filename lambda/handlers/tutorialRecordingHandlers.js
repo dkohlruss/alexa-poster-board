@@ -15,8 +15,7 @@ const tutorialRecordingHandlers = Alexa.CreateStateHandler(constants.states.TUTR
 
     this.handler.state = constants.states.MAIN;
     this.emit(':ask', `You said: ${input}. Since this is just the tutorial, it won't be saved.
-              You've completed the official Bort tutorial and should feel very pleased with this
-              accomplishment. You can come back at any time by saying <break /> tutorial <break />
+              You can come back to the tutorial at any time by saying <break /> tutorial <break />
               in the main menu.  Main Menu: Would you like to listen to a Bort,
               or submit a Bort?  You can also ask for more information about this skill.`,
               `Would you like to listen to a Bort, submit a Bort, or get more information about Bort?`);

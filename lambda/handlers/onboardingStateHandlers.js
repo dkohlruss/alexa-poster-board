@@ -15,7 +15,6 @@ const onboardingHandlers = Alexa.CreateStateHandler(constants.states.ONBOARDING,
     let deviceId = this.event.context.System.device.deviceId;
     let consentToken = this.event.context.System.user.permissions.consentToken;
 
-    console.log(consentToken);
     if (!consentToken) {
       console.log('No consent token found.  Value: ' + consentToken);
       this.emit(':tellWithPermissionCard', 'Please enable Location permissions for this skill in the Amazon Alexa app.', constants.ALL_ADDRESS_PERMISSION);
@@ -48,11 +47,7 @@ const onboardingHandlers = Alexa.CreateStateHandler(constants.states.ONBOARDING,
   },
 
   'Unhandled': function() {
-    if (!this.attributes['listened']) {
-      this.attributes['listened'] = [0];
-    }
-    this.handler.state = constants.states.TUTORIAL;
-    this.emitWithState('LaunchRequest')
+    this.emitWithState('NewSession');
   }
 
 });

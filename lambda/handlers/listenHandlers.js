@@ -49,7 +49,8 @@ const listenHandlers = Alexa.CreateStateHandler(constants.states.LISTENING, {
               return (obj.lat <= latNorth && obj.lat >= latSouth);
             });
         quotes = _.sortBy(quotes, [function(obj) { return obj.hotness; }]);
-
+        quotes = quotes.reverse();
+        
         let listenedArr = this.attributes['listened'];
         for (let i = 0; i < quotes.length; i++) {
           if (listenedArr.indexOf(quotes[i].Id) === -1) {

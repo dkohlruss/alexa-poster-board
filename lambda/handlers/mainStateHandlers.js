@@ -121,7 +121,7 @@ const mainStateHandlers = Alexa.CreateStateHandler(constants.states.MAIN, {
         });
       });
 
-      console.log(ids);
+
 
       let params = {
         'RequestItems': {
@@ -130,7 +130,7 @@ const mainStateHandlers = Alexa.CreateStateHandler(constants.states.MAIN, {
           }
         }
       };
-      console.log(params);
+      
 
       doc.batchGet(params, (err, data) => {
         if (err) {
