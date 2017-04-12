@@ -13,6 +13,7 @@ const doc = new AWS1.DynamoDB.DocumentClient({apiVersion: '2012-08-10'});
 const mainStateHandlers = Alexa.CreateStateHandler(constants.states.MAIN, {
 
   'LaunchRequest': function() {
+    console.log('MAIN LAUNCHREQUEST');
     let deviceId = this.event.context.System.device.deviceId;
     let consentToken = this.event.context.System.user.permissions.consentToken;
 
@@ -40,7 +41,8 @@ const mainStateHandlers = Alexa.CreateStateHandler(constants.states.MAIN, {
                     or get help with additional options?`, `You can listen to a Bort, submit a Bort, or ask for help.`);
 
               }).catch((err) => {
-                console.log(err);
+                console.log('Address error: ' + err);
+                this.emit(':tellWithPermissionCard', 'There was a problem getting the address from your Amazon account.  Please check your default Amazon address, as well as your location permissions in the Amazon Alexa app to use this skill.', constants.ALL_ADDRESS_PERMISSION);
               }); // End of getLocation Promise
           }
       } else {
@@ -49,27 +51,31 @@ const mainStateHandlers = Alexa.CreateStateHandler(constants.states.MAIN, {
       }
     }).catch((err) => {
       console.log(err);
-      this.emit(':tellWithPermissionCard', 'Please check your Location permissions and ensure they are set in the Amazon Alexa app to use this skill.');
+      this.emit(':tellWithPermissionCard', 'Please check your Location permissions and ensure they are set in the Amazon Alexa app to use this skill.', constants.ALL_ADDRESS_PERMISSION);
     });
   },
 
   'MenuIntent': function() {
+    console.log('MAIN MENUINTENT');
     this.emit(':ask', `Main menu. Would you like to listen to a popular Bort, submit a new Bort,
           or get help with additional options?`, `You can listen to a Bort, submit a Bort, or ask for help.`);
   },
 
   'ListenIntent': function() {
+    console.log('MAIN LISTENINTENT');
     this.handler.state = constants.states.LISTENING;
     this.emitWithState('ListenIntent');
   },
 
   'SubmitIntent': function() {
+    console.log('MAIN SUBMITINTENT');
     this.handler.state = constants.states.RECORDING;
     this.emit(':ask', `Let's record a Bort.  After the beep, it's time to Bort. ${ping}`,
               `I didn't get your Bort, please try again after the beep. ${ping}`);
   },
 
   'AboutIntent': function() {
+    console.log('MAIN ABOUTINTENT');
     const imageObj = {
       smallImageUrl: 'https://s3.amazonaws.com/dkohlruss/smallImg.jpg',
       largeImageUrl: 'https://s3.amazonaws.com/dkohlruss/largeImg.jpg'
@@ -85,12 +91,14 @@ const mainStateHandlers = Alexa.CreateStateHandler(constants.states.MAIN, {
   },
 
   'SonsNameIntent': function() {
+    console.log('MAIN SONSNAMEINTENT');
     this.emit(':ask', `I'm flattered that you named your child after a meme.  But I wonder something,
               what kind of person would do that?  Main menu: Would you like to listen to a Bort, submit a Bort,
               or get help with additional options?`, `You can listen to a Bort, submit a Bort, or ask for help.`);
   },
 
   'StatisticsIntent': function() {
+    console.log('MAIN STATISTICSINTENT');
     let recorded = 0;
     let recordedLength = 0;
     if (this.attributes['recorded']) {
@@ -130,7 +138,7 @@ const mainStateHandlers = Alexa.CreateStateHandler(constants.states.MAIN, {
           }
         }
       };
-      
+
 
       doc.batchGet(params, (err, data) => {
         if (err) {
@@ -170,26 +178,31 @@ const mainStateHandlers = Alexa.CreateStateHandler(constants.states.MAIN, {
   },
 
   'TutorialIntent': function() {
+    console.log('MAIN TUTORIALINTENT');
     this.handler.state = constants.states.TUTORIAL;
     this.emitWithState('NewSession');
   },
 
   'AMAZON.StopIntent': function() {
+    console.log('MAIN STOPINTENT');
     // State automatically saved with tell emit
     this.emit(':tell', 'Goodbye!');
   },
 
   'AMAZON.CancelIntent': function() {
+    console.log('MAIN CANCELINTENT');
     // State automatically saved with tell emit
     this.emit(':tell', 'Goodbye!');
   },
 
   'SessionEndedRequest': function() {
+    console.log('MAIN SESSIONENDEDREQUEST');
     // Will save the state when user times out
     this.emit(':saveState', true);
   },
 
   'AMAZON.HelpIntent': function() {
+    console.log('MAIN HELPINTENT');
     this.emit(':ask', `You are currently in the main menu. You can listen to a Bort, record a Bort,
               go to the tutorial, get your account statistics, find out more about this skill. You
               can also exit at any time by saying: Stop. Which would you like to do?`,
@@ -198,6 +211,7 @@ const mainStateHandlers = Alexa.CreateStateHandler(constants.states.MAIN, {
   },
 
   'Unhandled': function() {
+    console.log('MAIN UNHANDLED');
     this.emitWithState('AMAZON.HelpIntent');
   }
 

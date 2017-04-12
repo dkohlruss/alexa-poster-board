@@ -12,11 +12,13 @@ const doc = new AWS1.DynamoDB.DocumentClient({apiVersion: '2012-08-10'});
 const listenHandlers = Alexa.CreateStateHandler(constants.states.LISTENING, {
 
   'LaunchRequest': function() {
+    console.log('LISTENING LAUNCHREQUEST');
     this.handler.state = constants.states.MAIN;
     this.emitWithState('LaunchRequest');
   },
 
   'ListenIntent': function() {
+    console.log('LISTENING LISTENINTENT');
     let lngEast = this.attributes['area'].east;
     let lngWest = this.attributes['area'].west;
 
@@ -50,7 +52,7 @@ const listenHandlers = Alexa.CreateStateHandler(constants.states.LISTENING, {
             });
         quotes = _.sortBy(quotes, [function(obj) { return obj.hotness; }]);
         quotes = quotes.reverse();
-        
+
         let listenedArr = this.attributes['listened'];
         for (let i = 0; i < quotes.length; i++) {
           if (listenedArr.indexOf(quotes[i].Id) === -1) {
@@ -75,32 +77,38 @@ const listenHandlers = Alexa.CreateStateHandler(constants.states.LISTENING, {
   },
 
   'MenuIntent': function() {
+    console.log('LISTENING MENUINTENT');
     this.handler.state = constants.states.MAIN;
     this.emitWithState('MenuIntent');
   },
 
   'AMAZON.StopIntent': function() {
+    console.log('LISTENING STOPINTENT');
     // State automatically saved with tell emit
     this.emit(':tell', 'Goodbye!');
   },
 
   'AMAZON.CancelIntent': function() {
+    console.log('LISTENING CANCELINTENT');
     this.handler.state = constants.states.MAIN;
     this.emitWithState('MenuIntent');
   },
 
   'SessionEndedRequest': function() {
+    console.log('LISTENING USER TIMED OUT');
     // Will save the state when user times out
     this.emit(':saveState', false);
   },
 
   'AMAZON.HelpIntent': function() {
+    console.log('LISTENING HELPINTENT');
     this.emit(':ask', `You are currently listening to Borts. You can either listen to a
               Bort, or return to the Main Menu.`, `The commands available to you are:
               listen, and main menu. You can exit at any time by saying: stop`);
   },
 
   'Unhandled': function() {
+    console.log('LISTENING UNHANDLED');
     this.emitWithState('AMAZON.HelpIntent');
   }
 

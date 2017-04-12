@@ -10,6 +10,7 @@ const ping = '<audio src="https://s3.amazonaws.com/dkohlruss/ping.mp3" />';
 const onboardingHandlers = Alexa.CreateStateHandler(constants.states.ONBOARDING, {
 
   'NewSession': function() {
+    console.log('ONBOARDING NEWSESSION');
     this.attributes['listened'] = [];
     this.attributes['recorded'] = [];
     let deviceId = this.event.context.System.device.deviceId;
@@ -36,17 +37,29 @@ const onboardingHandlers = Alexa.CreateStateHandler(constants.states.ONBOARDING,
             this.handler.state = constants.states.TUTORIAL;
             this.emitWithState('LaunchRequest');
           }).catch((err) => {
-            console.log(err);
+            console.log('Error: ' + err);
+            this.emit(':tellWithPermissionCard', 'There was a problem getting the address from your Amazon account.  Please check your default Amazon address, as well as your location permissions in the Amazon Alexa app to use this skill.', constants.ALL_ADDRESS_PERMISSION);
           }); // End of getLocation Promise
         }
       }).catch((err) => {
-        this.emit(':tellWithPermissionCard', 'Please check your Location permissions and ensure they are set in the Amazon Alexa app to use this skill.');
+        this.emit(':tellWithPermissionCard', 'Please check your Location permissions and ensure they are set in the Amazon Alexa app to use this skill.', constants.ALL_ADDRESS_PERMISSION);
         console.log(err);
       }); // End of getAddress promise
     }
   },
 
+  'LaunchRequest': function() {
+    console.log('ONBOARDING LAUNCHREQUEST');
+    this.emitWithState('NewSession');
+  },
+
+  'SessionEndedRequest': function() {
+    console.log('ONBOARDING SESSIONENDEDREQUEST');
+    this.emit(':tell', 'Goodbye!');
+  },
+
   'Unhandled': function() {
+    console.log('ONBOARDING UNHANDLED');
     this.emitWithState('NewSession');
   }
 

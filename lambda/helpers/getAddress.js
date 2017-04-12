@@ -8,13 +8,21 @@ const getAddress = function(deviceId, token) {
       url: url,
       method: 'GET',
       headers: {
+        accept: 'application/json',
         authorization: auth
       }
     })
-    .then((response, body) => {
-      resolve(JSON.parse(response));
+    .then((response) => {
+        try {
+            console.log("DATA: " + response);
+            resolve(JSON.parse(data));
+        } catch (err) {
+            console.log("ERR: " + err);
+            reject(err);
+        }
     })
     .catch((err) => {
+      console.log("ERR: " + err);
       reject(err);
     });
   });

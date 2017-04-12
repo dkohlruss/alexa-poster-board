@@ -1,5 +1,5 @@
 const setUserLocation = function(location) {
-
+  console.log("SETTING USER LOCAITON");
   const radiusLat = 0.36; // Radius of ~50km from location.lat, at 40 latitude
   const radiusLng = 0.58; // Radius of ~50km from location.lng, at 40 latitude
 

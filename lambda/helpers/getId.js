@@ -2,6 +2,7 @@ const request = require('request-promise');
 const secrets = require('../constants/secrets');
 
 const getId = function(increase) {
+  console.log("GET ID");
   return new Promise((resolve, reject) => {
     request({
       url: 'http://www.stateful.co/c/confessionCount/inc',

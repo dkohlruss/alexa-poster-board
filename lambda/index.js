@@ -12,10 +12,11 @@ const savingHandlers = require('./handlers/savingHandlers');
 
 exports.handler = function(event, context, callback) {
   var alexa = Alexa.handler(event, context);
-
+  console.log("ALEXA VAR SET...");
   alexa.appId = constants.appId;
   alexa.dynamoDBTableName = constants.dynamoDBTableName;
-
+  console.log("APPID AND DBNAME SET...");
+  console.log("REGISTERING HANDLERS");
   alexa.registerHandlers(
     onboardingStateHandlers,
     tutorialHandlers,
@@ -27,6 +28,6 @@ exports.handler = function(event, context, callback) {
     recordingHandlers,
     savingHandlers
   );
-
+  console.log("HANDLERS REGISTERED");
   alexa.execute();
 };

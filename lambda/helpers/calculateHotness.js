@@ -4,6 +4,7 @@ const AWS = require('aws-sdk');
 const doc = new AWS.DynamoDB.DocumentClient({apiVersion: '2012-08-10'});
 
 const calculateHotness = function(data) {
+  console.log("HOTNESS CALCULATED");
   let confessionNum = data.Attributes.Id;
   let points = data.Attributes.ups - data.Attributes.downs + 2;
   let now = Date.now();

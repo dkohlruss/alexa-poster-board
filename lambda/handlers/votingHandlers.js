@@ -11,11 +11,13 @@ const doc = new AWS1.DynamoDB.DocumentClient({apiVersion: '2012-08-10'});
 const votingHandlers = Alexa.CreateStateHandler(constants.states.VOTING, {
 
   'LaunchRequest': function() {
+    console.log('VOTING LAUNCHREQUEST');
     this.handler.state = constants.states.MAIN;
     this.emitWithState('LaunchRequest');
   },
 
   'UpVotingIntent': function() {
+    console.log('VOTING UPVOTINGINTENT');
     // Index of confession
     let confessionNum = this.attributes['confessionNum'];
 
@@ -44,6 +46,7 @@ const votingHandlers = Alexa.CreateStateHandler(constants.states.VOTING, {
   },
 
   'DownVotingIntent': function() {
+    console.log('VOTING DOWNVOTINGINTENT');
     // Index of confession
     let confessionNum = this.attributes['confessionNum'];
 
@@ -74,26 +77,31 @@ const votingHandlers = Alexa.CreateStateHandler(constants.states.VOTING, {
   },
 
   'MenuIntent': function() {
+    console.log('VOTING MENUINTENT');
     this.handler.state = constants.states.MAIN;
     this.emitWithState('MenuIntent');
   },
 
   'AMAZON.StopIntent': function() {
+    console.log('VOTING STOPINTENT');
     // State automatically saved with tell emit
     this.emit(':tell', 'Goodbye!');
   },
 
   'AMAZON.CancelIntent': function() {
+    console.log('VOTING CANCELINTENT');
     this.handler.state = constants.states.MAIN;
     this.emitWithState('LaunchRequest');
   },
 
   'SessionEndedRequest': function() {
+    console.log('VOTING SESSIONENDEDREQUEST');
     this.handler.state = constants.states.MAIN;
     this.emit(':saveState', true);
   },
 
   'AMAZON.HelpIntent': function() {
+    console.log('VOTING HELPINTENT');
     this.emit(':ask', `You are currently voting on the Bort you just heard. This helps
               keep things fresh for you and other users of this skill. The commands available
               to you are: upvote, downvote, and main menu.`, `The commands available to you are: upvote,
@@ -101,6 +109,7 @@ const votingHandlers = Alexa.CreateStateHandler(constants.states.VOTING, {
   },
 
   'Unhandled': function() {
+    console.log('VOTING UNHANDLED');
     this.emitWithState('AMAZON.HelpIntent');
   }
 

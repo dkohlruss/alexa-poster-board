@@ -1,4 +1,5 @@
 const setAddress = function(addressObj) {
+  console.log("SETTING ADDRESS...");
   let formattedAddress = '';
 
   if (addressObj.addressLine1) {
@@ -26,6 +27,7 @@ const setAddress = function(addressObj) {
     formattedAddress += ' ' + addressObj.postalCode;
   }
 
+  console.log(formattedAddress);
   return formattedAddress;
 }
 

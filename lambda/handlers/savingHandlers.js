@@ -12,17 +12,20 @@ const doc = new AWS1.DynamoDB.DocumentClient({apiVersion: '2012-08-10'});
 const savingHandlers = Alexa.CreateStateHandler(constants.states.SAVING, {
 
   'LaunchRequest': function() {
+    console.log('SAVING LAUNCHREQUEST');
     this.handler.state = constants.states.MAIN;
     this.emitWithState('LaunchRequest');
   },
 
   'RerecordIntent': function() {
+    console.log('SAVING RERECORDINTENT');
     this.handler.state = constants.states.RECORDING;
     this.emit(':ask', `Let's try again.  Just say your Bort after the beep and it will be
               recorded. ${ping}`, `I didn't get your Bort, please try again after the beep. ${ping}`);
   },
 
   'SaveIntent': function() {
+    console.log('SAVING SAVEINTENT');
       let input = this.attributes['input'];
       let lat = this.attributes['lat'];
       let lng = this.attributes['lng'];
@@ -71,26 +74,31 @@ const savingHandlers = Alexa.CreateStateHandler(constants.states.SAVING, {
   },
 
   'MenuIntent': function() {
+    console.log('SAVING MENUINTENT');
     this.handler.state = constants.states.MAIN;
     this.emitWithState('MenuIntent');
   },
 
   'AMAZON.StopIntent': function() {
+    console.log('SAVING STOPINTENT');
     // State automatically saved with tell emit
     this.emit(':tell', 'Goodbye!');
   },
 
   'AMAZON.CancelIntent': function() {
+    console.log('SAVING CANCELINTENT');
     this.handler.state = constants.states.MAIN;
     this.emitWithState('MenuIntent');
   },
 
   'SessionEndedRequest': function() {
+    console.log('SAVING SESSIONENDEDREQUEST');
     // Will save the state when user times out
     this.emit(':saveState', false);
   },
 
   'AMAZON.HelpIntent': function() {
+    console.log('SAVING HELPINTENT');
     let input = this.attributes['input'];
     this.emit(':ask', `You are currently in the saving options for your Bort.
               The Bort currently in memory is: ${ping} ${input}.
@@ -99,6 +107,7 @@ const savingHandlers = Alexa.CreateStateHandler(constants.states.SAVING, {
   },
 
   'Unhandled': function() {
+    console.log('SAVING UNHANDLED');
     this.emitWithState('AMAZON.HelpIntent');
   }
 
