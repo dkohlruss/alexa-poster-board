@@ -11,15 +11,21 @@ const onboardingHandlers = Alexa.CreateStateHandler(constants.states.ONBOARDING,
 
   'NewSession': function() {
     console.log('ONBOARDING NEWSESSION');
+    console.log("context: ");
+    console.log(JSON.stringify(this.event, null, 4));
     this.attributes['listened'] = [];
     this.attributes['recorded'] = [];
-    let deviceId = this.event.context.System.device.deviceId;
-    let consentToken = this.event.context.System.user.permissions.consentToken;
 
-    if (!consentToken) {
-      console.log('No consent token found.  Value: ' + consentToken);
-      this.emit(':tellWithPermissionCard', 'Please enable Location permissions for this skill in the Amazon Alexa app.', constants.ALL_ADDRESS_PERMISSION);
-    } else {
+    try {
+      let deviceId = this.event.context.System.device.deviceId;
+      console.log('device: ' + deviceId);
+
+      console.log('other consent token: ' + this.event.session.user.permissions.consentToken);
+      let consentToken = this.event.context.System.user.permissions.consentToken;
+
+      console.log('consentToken: ' + consentToken);
+
+
 
       getAddress(deviceId, consentToken).then((res) => {
         let fullAddress = setAddress(res);
@@ -42,9 +48,12 @@ const onboardingHandlers = Alexa.CreateStateHandler(constants.states.ONBOARDING,
           }); // End of getLocation Promise
         }
       }).catch((err) => {
-        this.emit(':tellWithPermissionCard', 'Please check your Location permissions and ensure they are set in the Amazon Alexa app to use this skill.', constants.ALL_ADDRESS_PERMISSION);
         console.log(err);
+        this.emit(':tellWithPermissionCard', 'Please check your location permissions and ensure they are set in the Amazon Alexa app to use this skill.', constants.ALL_ADDRESS_PERMISSION);
       }); // End of getAddress promise
+    } catch(err) {
+      console.log('No consent token found: ' + err);
+      this.emit(':tell', 'There was a problem retrieving your address information.  Please ensure your location permissions are set in your Alexa app.', constants.ALL_ADDRESS_PERMISSION);
     }
   },
 

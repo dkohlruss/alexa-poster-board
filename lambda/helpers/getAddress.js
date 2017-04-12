@@ -15,7 +15,7 @@ const getAddress = function(deviceId, token) {
     .then((response) => {
         try {
             console.log("DATA: " + response);
-            resolve(JSON.parse(data));
+            resolve(JSON.parse(response));
         } catch (err) {
             console.log("ERR: " + err);
             reject(err);
