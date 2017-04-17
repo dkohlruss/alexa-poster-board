@@ -14,45 +14,50 @@ const mainStateHandlers = Alexa.CreateStateHandler(constants.states.MAIN, {
 
   'LaunchRequest': function() {
     console.log('MAIN LAUNCHREQUEST');
-    let deviceId = this.event.context.System.device.deviceId;
-    let consentToken = this.event.context.System.user.permissions.consentToken;
 
-    if (!consentToken) {
-      this.emit(':tellWithPermissionCard', 'Please enable Location permissions for this skill in the Amazon Alexa app.', constants.ALL_ADDRESS_PERMISSION);
-    }
+    try {
+      let deviceId = this.event.context.System.device.deviceId;
+      console.log('device: ' + deviceId);
+      console.log('other consent token: ' + this.event.session.user.permissions.consentToken);
+      let consentToken = this.event.context.System.user.permissions.consentToken;
+      console.log('consentToken: ' + consentToken);
 
-    getAddress(deviceId, consentToken).then((res) => {
-      let fullAddress = setAddress(res);
-      if (!this.attributes['address'] || this.attributes['address'] !== fullAddress) {
-        if (!fullAddress) {
-          this.emit(':tell', `It looks like you haven't set your address.  You will need to do so in order to use this skill.`);
+      getAddress(deviceId, consentToken).then((res) => {
+        let fullAddress = setAddress(res);
+        if (!this.attributes['address'] || this.attributes['address'] !== fullAddress) {
+          if (!fullAddress) {
+            this.emit(':tell', `It looks like you haven't set your address.  You will need to do so in order to use this skill.`);
+          } else {
+            getLocationData(fullAddress).then((result) => {
+                let location = result.results[0].geometry.location;
+                let lat = location.lat;
+                let lng = location.lng;
+                let area = setUserLocation(location);
+                this.attributes['address'] = fullAddress;
+                this.attributes['lat'] = lat;
+                this.attributes['lng'] = lng;
+                this.attributes['area'] = area;
+
+                this.emit(':ask', `Welcome to Bort. Would you like to listen to a popular Bort, submit a new Bort,
+                      or get help with additional options?`, `You can listen to a Bort, submit a Bort, or ask for help.`);
+
+                }).catch((err) => {
+                  console.log('Address error: ' + err);
+                  this.emit(':tellWithPermissionCard', 'There was a problem getting the address from your Amazon account.  Please check your default Amazon address, as well as your location permissions in the Amazon Alexa app to use this skill.', constants.ALL_ADDRESS_PERMISSION);
+                }); // End of getLocation Promise
+            }
         } else {
-          getLocationData(fullAddress).then((result) => {
-              let location = result.results[0].geometry.location;
-              let lat = location.lat;
-              let lng = location.lng;
-              let area = setUserLocation(location);
-              this.attributes['address'] = fullAddress;
-              this.attributes['lat'] = lat;
-              this.attributes['lng'] = lng;
-              this.attributes['area'] = area;
-
-              this.emit(':ask', `Welcome to Bort. Would you like to listen to a popular Bort, submit a new Bort,
-                    or get help with additional options?`, `You can listen to a Bort, submit a Bort, or ask for help.`);
-
-              }).catch((err) => {
-                console.log('Address error: ' + err);
-                this.emit(':tellWithPermissionCard', 'There was a problem getting the address from your Amazon account.  Please check your default Amazon address, as well as your location permissions in the Amazon Alexa app to use this skill.', constants.ALL_ADDRESS_PERMISSION);
-              }); // End of getLocation Promise
-          }
-      } else {
-        this.emit(':ask', `Welcome back to Bort. Would you like to listen to a popular Bort, submit a new Bort,
-              or get help with additional options?`, `You can listen to a Bort, submit a Bort, or ask for help.`);
-      }
-    }).catch((err) => {
-      console.log(err);
-      this.emit(':tellWithPermissionCard', 'Please check your Location permissions and ensure they are set in the Amazon Alexa app to use this skill.', constants.ALL_ADDRESS_PERMISSION);
-    });
+          this.emit(':ask', `Welcome back to Bort. Would you like to listen to a popular Bort, submit a new Bort,
+                or get help with additional options?`, `You can listen to a Bort, submit a Bort, or ask for help.`);
+        }
+      }).catch((err) => {
+        console.log(err);
+        this.emit(':tellWithPermissionCard', 'Please check your Location permissions and ensure they are set in the Amazon Alexa app to use this skill.', constants.ALL_ADDRESS_PERMISSION);
+      });
+    } catch(err) {
+      console.log('No consent token found: ' + err);
+      this.emit(':tellWithPermissionCard', 'There was a problem retrieving your address information.  Please ensure your location permissions are set in your Alexa app.', constants.ALL_ADDRESS_PERMISSION);
+    }
   },
 
   'MenuIntent': function() {
