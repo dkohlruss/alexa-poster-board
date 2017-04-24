@@ -7,40 +7,39 @@ const tutorialHandlers = Alexa.CreateStateHandler(constants.states.TUTORIAL, {
 
   'LaunchRequest': function() {
     console.log('TUTORIAL LAUNCHREQUEST');
-    this.emit(':ask', `This is Bort, the interactive skill that lets you share and listen
-                      to messages, called Borts, from anonymous Alexa users. Borts are short messages,
-                      and they can be jokes, or confessions, or quips. Since you're new at Borting it up,
-                      let's go through a quick tutorial.  We will start by listening to a Bort.  Say
-                      something like <break /> Listen to a Bort <break /> or just <break />listen.  You
+    this.emit(':ask', `This is Bulletin Board, the interactive skill that lets you share and listen
+                      to messages from anonymous Alexa users in your area. Since you're new or requested help,
+                      let's go through a quick tutorial.  We will start by listening to a message.  Say
+                      something like <break /> Listen to a message <break /> or just <break />listen.  You
                       can also skip this tutorial by saying <break />skip<break /> or <break />Skip this
                       tutorial.`, `Would you like to continue this tutorial, or skip it?`);
   },
 
   'ListenIntent': function() {
     console.log('TUTORIAL LISTENINTENT');
-    this.emit(':ask', `You'll now be presented with a Bort: ${ping} In all honesty, I just don't think
+    this.emit(':ask', `You'll now be presented with a message: ${ping} In all honesty, I just don't think
                       Game of Thrones is very good. ${ping} <break />
-                      What a scandalous Bort! You can now upvote or downvote this Bort by saying something like <break />
+                      What a scandalous message! You can now upvote or downvote this message by saying something like <break />
                       Upvote<break /> or <break />Thumbs down<break /> or just <break />I like it.`,
-                      `Would you like to upvote or downvote this Bort?`);
+                      `Would you like to upvote or downvote this message?`);
   },
 
   'UpVotingIntent': function() {
     console.log('TUTORIAL UPVOTINGINTENT');
     this.handler.state = constants.states.TUTCONFESS;
-    this.emit(':ask', `You've upvoted this Bort, that increases its overall score and makes it more
-                      likely to be heard by others. Now it's time to submit your own Bort, just for fun.  Say something
-                      like <break />Submit a Bort<break /> or <break />tell a Bort<break />.`, `To continue, say something
-                      like <break />tell a Bort<break /> or <break /> submit my Bort.`);
+    this.emit(':ask', `You've upvoted this message, that increases its overall score and makes it more
+                      likely to be heard by others. Now it's time to submit your own message, just for fun.  Say something
+                      like <break />Submit a message<break /> or <break />post a message<break />.`, `To continue, say something
+                      like <break />post a message<break /> or <break /> submit my message.`);
   },
 
   'DownVotingIntent': function() {
     console.log('TUTORIAL DOWNVOTINGINTENT');
     this.handler.state = constants.states.TUTCONFESS;
-    this.emit(':ask', `You've downvoted this Bort, that decreases its overall score and makes it less
-                      likely to be heard by others. Now it's time to submit your own Bort, just for fun.  Say something
-                      like <break />Say a Bort<break /> or <break />tell a Bort<break />.`, `To continue, say something
-                      like <break />tell a Bort<break /> or <break /> submit my Bort.`);
+    this.emit(':ask', `You've downvoted this message, that decreases its overall score and makes it less
+                      likely to be heard by others. Now it's time to submit your own message, just for fun.  Say something
+                      like <break />Say a message<break /> or <break />tell a message<break />.`, `To continue, say something
+                      like <break />post a message<break /> or <break /> submit my message.`);
   },
 
   'TutorialContinueIntent': function() {
@@ -75,7 +74,7 @@ const tutorialHandlers = Alexa.CreateStateHandler(constants.states.TUTORIAL, {
 
   'AMAZON.HelpIntent': function() {
     console.log('TUTORIAL HELPINTENT');
-    this.emit(':ask', `Bort is an interactive, anonymous, localized messaging system.
+    this.emit(':ask', `Bulletin Board is an interactive, anonymous, localized messaging system.
     You are currently in the tutorial. The commands available to you are: listen, skip,
     continue, up vote, and down vote. You can also exit at any time by saying <break /> stop.
     Which would you like to do?`, `The commands available to you are: listen, skip, continue,

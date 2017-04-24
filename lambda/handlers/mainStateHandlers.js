@@ -38,8 +38,8 @@ const mainStateHandlers = Alexa.CreateStateHandler(constants.states.MAIN, {
                 this.attributes['lng'] = lng;
                 this.attributes['area'] = area;
 
-                this.emit(':ask', `Welcome to Bort. Would you like to listen to a popular Bort, submit a new Bort,
-                      or get help with additional options?`, `You can listen to a Bort, submit a Bort, or ask for help.`);
+                this.emit(':ask', `Welcome to Bulletin Board. Would you like to listen to a popular message, submit a new message,
+                      or get help with additional options?`, `You can listen to a message, submit a message, or ask for help.`);
 
                 }).catch((err) => {
                   console.log('Address error: ' + err);
@@ -47,8 +47,8 @@ const mainStateHandlers = Alexa.CreateStateHandler(constants.states.MAIN, {
                 }); // End of getLocation Promise
             }
         } else {
-          this.emit(':ask', `Welcome back to Bort. Would you like to listen to a popular Bort, submit a new Bort,
-                or get help with additional options?`, `You can listen to a Bort, submit a Bort, or ask for help.`);
+          this.emit(':ask', `Welcome back to Bulletin Board. Would you like to listen to a popular message, submit a new message,
+                or get help with additional options?`, `You can listen to a message, submit a message, or ask for help.`);
         }
       }).catch((err) => {
         console.log(err);
@@ -62,8 +62,8 @@ const mainStateHandlers = Alexa.CreateStateHandler(constants.states.MAIN, {
 
   'MenuIntent': function() {
     console.log('MAIN MENUINTENT');
-    this.emit(':ask', `Main menu. Would you like to listen to a popular Bort, submit a new Bort,
-          or get help with additional options?`, `You can listen to a Bort, submit a Bort, or ask for help.`);
+    this.emit(':ask', `Main menu. Would you like to listen to a popular message, submit a new message,
+          or get help with additional options?`, `You can listen to a message, submit a message, or ask for help.`);
   },
 
   'ListenIntent': function() {
@@ -75,8 +75,8 @@ const mainStateHandlers = Alexa.CreateStateHandler(constants.states.MAIN, {
   'SubmitIntent': function() {
     console.log('MAIN SUBMITINTENT');
     this.handler.state = constants.states.RECORDING;
-    this.emit(':ask', `Let's record a Bort.  After the beep, it's time to Bort. ${ping}`,
-              `I didn't get your Bort, please try again after the beep. ${ping}`);
+    this.emit(':ask', `Let's record a message.  Speak your message after the beep. ${ping}`,
+              `I didn't get your message, please try again after the beep. ${ping}`);
   },
 
   'AboutIntent': function() {
@@ -85,21 +85,13 @@ const mainStateHandlers = Alexa.CreateStateHandler(constants.states.MAIN, {
       smallImageUrl: 'https://s3.amazonaws.com/dkohlruss/smallImg.jpg',
       largeImageUrl: 'https://s3.amazonaws.com/dkohlruss/largeImg.jpg'
     };
-    this.emit(':askWithCard', `The Bort skill was developed by David Kohlruss and is meant to
-              be for entertainment purposes only. The name Bort is a portmanteau of bulletin,
-              report, and post.  For more information, visit the developer's site, linked in
-              your Alexa app.  Main menu: Would you like to listen to a Bort, submit a Bort,
+    this.emit(':askWithCard', `The Bullentin Board skill was developed by David Kohlruss and is meant to
+              be for entertainment purposes only. For more information, visit the developer's site, linked in
+              your Alexa app.  Main menu: Would you like to listen to a message, submit a message,
               or get help with additional options?`,
-              `You can listen to a Bort, submit a Bort, or ask for help.`,
+              `You can listen to a message, submit a message, or ask for help.`,
               `About`,
-              `Hi! I'm David Kohlruss, the guy who developed this skill.  If you would like to get in touch with me, check out the official Bort twitter @BortAlexa or visit http://dkohlruss.github.io`, imageObj);
-  },
-
-  'SonsNameIntent': function() {
-    console.log('MAIN SONSNAMEINTENT');
-    this.emit(':ask', `I'm flattered that you named your child after a meme.  But I wonder something,
-              what kind of person would do that?  Main menu: Would you like to listen to a Bort, submit a Bort,
-              or get help with additional options?`, `You can listen to a Bort, submit a Bort, or ask for help.`);
+              `Hi! I'm David Kohlruss, the guy who developed this skill.  If you would like to get in touch with me, check out the official Bulletin Board twitter @BortAlexa or visit http://dkohlruss.github.io`, imageObj);
   },
 
   'StatisticsIntent': function() {
@@ -123,9 +115,9 @@ const mainStateHandlers = Alexa.CreateStateHandler(constants.states.MAIN, {
 
     if (recordedLength === 0) {
       this.handler.state = constants.states.MAIN;
-      this.emit(':ask', `Here is your re-Bort: You have listened to ${listenedLength} Borts,
-              and recorded ${recordedLength} Borts. Main menu: Would you like to listen to a Bort, submit a Bort,
-              or get help with additional options?`, `You can listen to a Bort, submit a Bort, or ask for help.`);
+      this.emit(':ask', `Here is your report: You have listened to ${listenedLength} messages,
+              and recorded ${recordedLength} messages. Main menu: Would you like to listen to a message, submit a message,
+              or get help with additional options?`, `You can listen to a message, submit a message, or ask for help.`);
     } else {
       let ids = [];
       recorded.forEach((id) => {
@@ -172,11 +164,11 @@ const mainStateHandlers = Alexa.CreateStateHandler(constants.states.MAIN, {
               plural[i] = 's';
             }
           }
-          this.emit(':ask', `Here is your re-Bort: You have listened to ${listenedLength} Bort${plural[0]}
-                  and recorded ${recordedLength} Bort${plural[1]}. Your best Bort of all time is: ${hottestQuote} <break /> with
-                  ${highestUps} upvote${plural[2]} and ${highestDowns} downvote${plural[3]}.  In total, your Borts have received ${totalUps}
-                  upvote${plural[4]} and ${totalDowns} downvote${plural[5]}.  Main menu: Would you like to listen to a Bort, submit a Bort,
-                  or get help for additional options?`, `You can listen to a Bort, submit a Bort, or ask for help.`);
+          this.emit(':ask', `Here is your report: You have listened to ${listenedLength} message${plural[0]}
+                  and recorded ${recordedLength} message${plural[1]}. Your best message of all time is: ${hottestQuote} <break /> with
+                  ${highestUps} upvote${plural[2]} and ${highestDowns} downvote${plural[3]}.  In total, your messages have received ${totalUps}
+                  upvote${plural[4]} and ${totalDowns} downvote${plural[5]}.  Main menu: Would you like to listen to a message, submit a message,
+                  or get help for additional options?`, `You can listen to a message, submit a message, or ask for help.`);
         }
       });
     };
@@ -208,7 +200,7 @@ const mainStateHandlers = Alexa.CreateStateHandler(constants.states.MAIN, {
 
   'AMAZON.HelpIntent': function() {
     console.log('MAIN HELPINTENT');
-    this.emit(':ask', `You are currently in the main menu. You can listen to a Bort, record a Bort,
+    this.emit(':ask', `You are currently in the main menu. You can listen to a message, record a message,
               go to the tutorial, get your account statistics, find out more about this skill. You
               can also exit at any time by saying: Stop. Which would you like to do?`,
               `You are currently in the main menu. The commands available to you are: listen, submit,

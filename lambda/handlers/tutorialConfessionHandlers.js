@@ -6,17 +6,17 @@ const ping = '<audio src="https://s3.amazonaws.com/dkohlruss/ping.mp3" />';
 const tutorialConfessionHandlers = Alexa.CreateStateHandler(constants.states.TUTCONFESS, {
   'LaunchRequest': function() {
     console.log('TUTCONFESS LAUNCHREQUEST');
-    this.emit(':ask', `Now it's time to submit your first Bort.  Say something
-    like <break />Say a Bort<break /> or <break />submit a Bort<break />`,
-    `To continue, say something like <break />tell a Bort<break /> or <break />
-    submit a Bort`);
+    this.emit(':ask', `Now it's time to submit your first message.  Say something
+    like <break />submit a message<break /> or <break />post a message<break />`,
+    `To continue, say something like <break />tell a message<break /> or <break />
+    submit a message`);
   },
 
   'SubmitIntent': function() {
     console.log('TUTCONFESS SUBMITINTENT');
     this.handler.state = constants.states.TUTRECORDING;
-    this.emit(':ask', `Ok, I'm going to <phoneme alphabet='x-sampa' ph='"'>record</phoneme> your Bort.  After the beep, you have a few
-    seconds to record the Bort. <break /> ${ping}`, `I didn't catch everything you said or you took
+    this.emit(':ask', `Ok, I'm going to <phoneme alphabet='x-sampa' ph='"'>record</phoneme> your message.  After the beep, you have a few
+    seconds to record the message. <break /> ${ping}`, `I didn't catch everything you said or you took
     too long, please try again after the beep. <break />  ${ping}`);
   },
 
@@ -46,7 +46,7 @@ const tutorialConfessionHandlers = Alexa.CreateStateHandler(constants.states.TUT
 
   'AMAZON.HelpIntent': function() {
     console.log('TUTCONFESS HELPINTENT');
-    this.emit(':ask', 'You are currently learning how to submit Borts. The commands available to you are: Submit, and skip.', 'The commands available to you are: Submit, and skip.');
+    this.emit(':ask', 'You are currently learning how to submit messages. The commands available to you are: Submit, and skip.', 'The commands available to you are: Submit, and skip.');
   },
 
   'Unhandled': function() {

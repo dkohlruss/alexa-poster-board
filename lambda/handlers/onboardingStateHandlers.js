@@ -25,8 +25,6 @@ const onboardingHandlers = Alexa.CreateStateHandler(constants.states.ONBOARDING,
 
       console.log('consentToken: ' + consentToken);
 
-
-
       getAddress(deviceId, consentToken).then((res) => {
         let fullAddress = setAddress(res);
         if (!fullAddress) {
@@ -53,7 +51,7 @@ const onboardingHandlers = Alexa.CreateStateHandler(constants.states.ONBOARDING,
       }); // End of getAddress promise
     } catch(err) {
       console.log('No consent token found: ' + err);
-      this.emit(':tell', 'There was a problem retrieving your address information.  Please ensure your location permissions are set in your Alexa app.', constants.ALL_ADDRESS_PERMISSION);
+      this.emit(':tellWithPermissionCard', 'There was a problem retrieving your address information.  Please ensure your location permissions are set in your Alexa app.', constants.ALL_ADDRESS_PERMISSION);
     }
   },
 

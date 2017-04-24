@@ -20,8 +20,8 @@ const savingHandlers = Alexa.CreateStateHandler(constants.states.SAVING, {
   'RerecordIntent': function() {
     console.log('SAVING RERECORDINTENT');
     this.handler.state = constants.states.RECORDING;
-    this.emit(':ask', `Let's try again.  Just say your Bort after the beep and it will be
-              recorded. ${ping}`, `I didn't get your Bort, please try again after the beep. ${ping}`);
+    this.emit(':ask', `Let's try again.  Just say your message after the beep and it will be
+              recorded. ${ping}`, `I didn't get your message, please try again after the beep. ${ping}`);
   },
 
   'SaveIntent': function() {
@@ -62,9 +62,9 @@ const savingHandlers = Alexa.CreateStateHandler(constants.states.SAVING, {
                 }
               });
               this.handler.state = constants.states.MAIN;
-              this.emit(':ask', `Your latest Bort: ${input} <break /> has been saved and can now be voted on by others.
-                        Main menu. Would you like to listen to a popular Bort, submit a new Bort, or get help with
-                        additional options?`, `You can listen to a Bort, submit a Bort, or ask for help.`);
+              this.emit(':ask', `Your latest message: ${input} <break /> has been saved and can now be voted on by others.
+                        Main menu. Would you like to listen to a popular message, submit a new message, or get help with
+                        additional options?`, `You can listen to a message, submit a message, or ask for help.`);
           }
         });
 
@@ -100,8 +100,8 @@ const savingHandlers = Alexa.CreateStateHandler(constants.states.SAVING, {
   'AMAZON.HelpIntent': function() {
     console.log('SAVING HELPINTENT');
     let input = this.attributes['input'];
-    this.emit(':ask', `You are currently in the saving options for your Bort.
-              The Bort currently in memory is: ${ping} ${input}.
+    this.emit(':ask', `You are currently in the saving options for your message.
+              The message currently in memory is: ${ping} ${input}.
               The commands available to you are: save, rerecord, and main menu.`,
               `The commands available to you are: save, rerecord, and main menu.`);
   },

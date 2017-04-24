@@ -1,12 +1,11 @@
 ListenIntent listen
 ListenIntent hear
-ListenIntent listen to a bort
+ListenIntent listen to a message
 ListenIntent listen to a message
 ListenIntent listen to a secret
 ListenIntent listen to one
 ListenIntent hear a confession
 ListenIntent hear a secret
-ListenIntent i want to hear a bort
 ListenIntent i want to hear a secret
 ListenIntent i want to hear a message
 ListenIntent i want to listen
@@ -14,7 +13,7 @@ ListenIntent i want to hear
 ListenIntent listen again
 ListenIntent listen to another
 ListenIntent tell me another
-ListenIntent what is the next bort
+ListenIntent what is the next message
 
 StatisticsIntent statistics
 StatisticsIntent my statistics
@@ -44,19 +43,18 @@ DownVotingIntent dumb
 TutorialContinueIntent continue
 TutorialContinueIntent continue the tutorial
 
-SonsNameIntent my sons name is also Bort
-
-SubmitIntent say a bort
-SubmitIntent tell a bort
-SubmitIntent Bort
-SubmitIntent submit a bort
-SubmitIntent submit my Bort
+SubmitIntent say a message
+SubmitIntent tell a message
+SubmitIntent post a message
+SubmitIntent submit a message
+SubmitIntent submit my message
 SubmitIntent submit
 SubmitIntent submit something
-SubmitIntent record a bort
+SubmitIntent post a message
+SubmitIntent record a message
 SubmitIntent record a message
 SubmitIntent send a message
-SubmitIntent send a bort
+SubmitIntent send a message
 
 TutorialSkipIntent skip
 TutorialSkipIntent skip this

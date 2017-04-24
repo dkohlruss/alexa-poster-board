@@ -4,9 +4,6 @@
       "intent": "AboutIntent"
     },
     {
-      "intent": "SonsNameIntent"
-    },
-    {
       "intent": "ListenIntent"
     },
     {

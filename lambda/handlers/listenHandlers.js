@@ -62,16 +62,16 @@ const listenHandlers = Alexa.CreateStateHandler(constants.states.LISTENING, {
             let quote = quotes[i].quote;
 
             this.handler.state = constants.states.VOTING;
-            this.emit(':ask', `Here is your Bort: ${ping} ${quote} <break /> ${ping} <break />
-                        Would you like to upvote or downvote this Bort.`, `Would you like to upvote
-                        or downvote the Bort you just heard?`);
+            this.emit(':ask', `Here is your Message: ${ping} ${quote} <break /> ${ping} <break />
+                        Would you like to upvote or downvote this message.`, `Would you like to upvote
+                        or downvote the message you just heard?`);
             break;
           }
         }
         this.handler.state = constants.states.MAIN;
-        this.emit(':ask', `You've listened to all available Borts.  Please try again later.  Main menu:
-                  Would you like to listen to a Bort, submit a Bort, or get help with additional options?`,
-                  `You can listen to a Bort, submit a Bort, or ask for help.`);
+        this.emit(':ask', `You've listened to all available messages.  Please try again later.  Main menu:
+                  Would you like to listen to a message, submit a message, or get help with additional options?`,
+                  `You can listen to a message, submit a message, or ask for help.`);
       }
     });
   },
@@ -102,8 +102,8 @@ const listenHandlers = Alexa.CreateStateHandler(constants.states.LISTENING, {
 
   'AMAZON.HelpIntent': function() {
     console.log('LISTENING HELPINTENT');
-    this.emit(':ask', `You are currently listening to Borts. You can either listen to a
-              Bort, or return to the Main Menu.`, `The commands available to you are:
+    this.emit(':ask', `You are currently listening to messages. You can either listen to a
+              message, or return to the Main Menu.`, `The commands available to you are:
               listen, and main menu. You can exit at any time by saying: stop`);
   },
 
