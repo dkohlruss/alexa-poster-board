@@ -85,13 +85,13 @@ const mainStateHandlers = Alexa.CreateStateHandler(constants.states.MAIN, {
       smallImageUrl: 'https://s3.amazonaws.com/dkohlruss/smallImg.jpg',
       largeImageUrl: 'https://s3.amazonaws.com/dkohlruss/largeImg.jpg'
     };
-    this.emit(':askWithCard', `The Bullentin Board skill was developed by David Kohlruss and is meant to
+    this.emit(':askWithCard', `The Poster Board skill was developed by David Kohlruss and is meant to
               be for entertainment purposes only. For more information, visit the developer's site, linked in
               your Alexa app.  Main menu: Would you like to listen to a post, submit a post,
               or get help with additional options?`,
               `You can listen to a post, submit a post, or ask for help.`,
               `About`,
-              `Hi! I'm David Kohlruss, the guy who developed this skill.  If you would like to get in touch with me, check out the official Poster Board twitter @BortAlexa or visit http://dkohlruss.github.io`, imageObj);
+              `Hi! I'm David Kohlruss, the guy who developed this skill.  If you would like to get in touch with me, check out http://dkohlruss.github.io`, imageObj);
   },
 
   'StatisticsIntent': function() {
