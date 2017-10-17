@@ -17,16 +17,16 @@ const recordingHandlers = Alexa.CreateStateHandler(constants.states.RECORDING, {
     this.attributes['input'] = input;
 
     this.handler.state = constants.states.SAVING;
-    this.emit(':ask', `The message I heard was: ${input}. You can save this, <phoneme alphabet="ipa" ph="rəˈkɔrd">record</phoneme> again, or return
-              to the main menu.`, `You can either save your message, <phoneme alphabet="ipa" ph="rəˈkɔrd">record</phoneme> again, or
+    this.emit(':ask', `The post I heard was: ${input}. You can save this, <phoneme alphabet="ipa" ph="rəˈkɔrd">record</phoneme> again, or return
+              to the main menu.`, `You can either save your post, <phoneme alphabet="ipa" ph="rəˈkɔrd">record</phoneme> again, or
               go back to the main menu.`);
   },
 
   'MenuIntent': function() {
     console.log('RECORDING MENUINTENT');
     this.handler.state = constants.states.MAIN;
-    this.emit(':ask', `Returning to the main menu. Would you like to listen to a popular meesage, submit a new message,
-          or get help with additional options?`, `You can listen to a message, submit a message, or ask for help.`);
+    this.emit(':ask', `Returning to the main menu. Would you like to listen to a popular meesage, submit a new post,
+          or get help with additional options?`, `You can listen to a post, submit a post, or ask for help.`);
   },
 
   'AMAZON.StopIntent': function() {
@@ -49,15 +49,15 @@ const recordingHandlers = Alexa.CreateStateHandler(constants.states.RECORDING, {
 
   'AMAZON.HelpIntent': function() {
     console.log('RECORDING HELPINTENT');
-    this.emit(':ask', `You're currently recording a message. To record the message, all you have to do is say
-              it.  You can also return to the main menu by saying: main menu.`, `Try to say your message again,
+    this.emit(':ask', `You're currently recording a post. To record the post, all you have to do is say
+              it.  You can also return to the main menu by saying: main menu.`, `Try to say your post again,
               or go back to the main menu. You can also exit by saying: Stop`);
   },
 
   'Unhandled': function() {
     console.log('RECORDING UNHANDLED');
-    this.emit(':ask', `I didn't quite get what you said. You'll have to repeat your message or go back to
-              the main menu.`, `Try to say your message again, or go back to the main menu. You can also
+    this.emit(':ask', `I didn't quite get what you said. You'll have to repeat your post or go back to
+              the main menu.`, `Try to say your post again, or go back to the main menu. You can also
               exit by saying: Stop`);
   }
 

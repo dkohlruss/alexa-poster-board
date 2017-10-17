@@ -39,8 +39,8 @@ const votingHandlers = Alexa.CreateStateHandler(constants.states.VOTING, {
         } else {
             calculateHotness(data);
             this.handler.state = constants.states.LISTENING;
-            this.emit(':ask', `Thanks for voting! Would you like to listen to another message
-                      or return to the main menu?`, `You can listen to a message, return to the main menu, or ask for help.`);
+            this.emit(':ask', `Thanks for voting! Would you like to listen to another post
+                      or return to the main menu?`, `You can listen to a post, return to the main menu, or ask for help.`);
         }
     });
   },
@@ -68,8 +68,8 @@ const votingHandlers = Alexa.CreateStateHandler(constants.states.VOTING, {
         } else {
             calculateHotness(data);
             this.handler.state = constants.states.LISTENING;
-            this.emit(':ask', `Thanks for voting! Would you like to listen to another message
-                      or return to the main menu?`, `You can listen to a message, return to the main menu, or ask for help.`);
+            this.emit(':ask', `Thanks for voting! Would you like to listen to another post
+                      or return to the main menu?`, `You can listen to a post, return to the main menu, or ask for help.`);
         }
     });
 
@@ -102,7 +102,7 @@ const votingHandlers = Alexa.CreateStateHandler(constants.states.VOTING, {
 
   'AMAZON.HelpIntent': function() {
     console.log('VOTING HELPINTENT');
-    this.emit(':ask', `You are currently voting on the message you just heard. This helps
+    this.emit(':ask', `You are currently voting on the post you just heard. This helps
               keep things fresh for you and other users of this skill. The commands available
               to you are: upvote, downvote, and main menu.`, `The commands available to you are: upvote,
               downvote, and main menu. You can also exit at any time by saying: Stop`);

@@ -1,19 +1,23 @@
 ListenIntent listen
 ListenIntent hear
 ListenIntent listen to a message
-ListenIntent listen to a message
 ListenIntent listen to a secret
+ListenIntent listen to a post
 ListenIntent listen to one
 ListenIntent hear a confession
 ListenIntent hear a secret
 ListenIntent i want to hear a secret
 ListenIntent i want to hear a message
+ListenIntent i want to hear a post
 ListenIntent i want to listen
 ListenIntent i want to hear
 ListenIntent listen again
 ListenIntent listen to another
 ListenIntent tell me another
 ListenIntent what is the next message
+ListenIntent what is the next post
+ListenIntent tell me a message
+ListenIntent tell me a post
 
 StatisticsIntent statistics
 StatisticsIntent my statistics
@@ -28,7 +32,6 @@ StatisticsIntent account stats
 UpVotingIntent up
 UpVotingIntent thumbs up
 UpVotingIntent I like it
-UpVotingIntent good
 UpVotingIntent cool
 UpVotingIntent upvote
 
@@ -37,8 +40,6 @@ DownVotingIntent down
 DownVotingIntent thumbs down
 DownVotingIntent I don't like it
 DownVotingIntent I hate it
-DownVotingIntent bad
-DownVotingIntent dumb
 
 TutorialContinueIntent continue
 TutorialContinueIntent continue the tutorial
@@ -55,6 +56,10 @@ SubmitIntent record a message
 SubmitIntent record a message
 SubmitIntent send a message
 SubmitIntent send a message
+SubmitIntent make a post
+SubmitIntent submit a post
+SubmitIntent tell a post
+SubmitIntent record a post
 
 TutorialSkipIntent skip
 TutorialSkipIntent skip this

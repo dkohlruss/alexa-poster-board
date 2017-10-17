@@ -101,7 +101,7 @@ const savingHandlers = Alexa.CreateStateHandler(constants.states.SAVING, {
     console.log('SAVING HELPINTENT');
     let input = this.attributes['input'];
     this.emit(':ask', `You are currently in the saving options for your message.
-              The message currently in memory is: ${ping} ${input}.
+              The post currently in memory is: ${ping} ${input}.
               The commands available to you are: save, rerecord, and main menu.`,
               `The commands available to you are: save, rerecord, and main menu.`);
   },

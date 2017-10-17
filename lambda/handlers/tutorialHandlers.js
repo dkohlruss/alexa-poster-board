@@ -7,39 +7,39 @@ const tutorialHandlers = Alexa.CreateStateHandler(constants.states.TUTORIAL, {
 
   'LaunchRequest': function() {
     console.log('TUTORIAL LAUNCHREQUEST');
-    this.emit(':ask', `This is Bulletin Board, the interactive skill that lets you share and listen
-                      to messages from anonymous Alexa users in your area. Since you're new or requested help,
-                      let's go through a quick tutorial.  We will start by listening to a message.  Say
-                      something like <break /> Listen to a message <break /> or just <break />listen.  You
+    this.emit(':ask', `This is Poster Board, the interactive skill that lets you share and listen
+                      to posts from anonymous Alexa users in your area. Since you're new or requested help,
+                      let's go through a quick tutorial.  We will start by listening to a post.  Say
+                      something like <break /> Listen to a post <break /> or just <break />listen.  You
                       can also skip this tutorial by saying <break />skip<break /> or <break />Skip this
                       tutorial.`, `Would you like to continue this tutorial, or skip it?`);
   },
 
   'ListenIntent': function() {
     console.log('TUTORIAL LISTENINTENT');
-    this.emit(':ask', `You'll now be presented with a message: ${ping} In all honesty, I just don't think
+    this.emit(':ask', `You'll now be presented with a post: ${ping} In all honesty, I just don't think
                       Game of Thrones is very good. ${ping} <break />
-                      What a scandalous message! You can now upvote or downvote this message by saying something like <break />
+                      What a scandalous post! You can now upvote or downvote this post by saying something like <break />
                       Upvote<break /> or <break />Thumbs down<break /> or just <break />I like it.`,
-                      `Would you like to upvote or downvote this message?`);
+                      `Would you like to upvote or downvote this post?`);
   },
 
   'UpVotingIntent': function() {
     console.log('TUTORIAL UPVOTINGINTENT');
     this.handler.state = constants.states.TUTCONFESS;
-    this.emit(':ask', `You've upvoted this message, that increases its overall score and makes it more
-                      likely to be heard by others. Now it's time to submit your own message, just for fun.  Say something
-                      like <break />Submit a message<break /> or <break />post a message<break />.`, `To continue, say something
-                      like <break />post a message<break /> or <break /> submit my message.`);
+    this.emit(':ask', `You've upvoted this post, that increases its overall score and makes it more
+                      likely to be heard by others. Now it's time to submit your own post, just for fun.  Say something
+                      like <break />Submit a post<break /> or <break />make a post<break />.`, `To continue, say something
+                      like <break />make a post<break /> or <break /> submit my post.`);
   },
 
   'DownVotingIntent': function() {
     console.log('TUTORIAL DOWNVOTINGINTENT');
     this.handler.state = constants.states.TUTCONFESS;
-    this.emit(':ask', `You've downvoted this message, that decreases its overall score and makes it less
-                      likely to be heard by others. Now it's time to submit your own message, just for fun.  Say something
-                      like <break />Say a message<break /> or <break />tell a message<break />.`, `To continue, say something
-                      like <break />post a message<break /> or <break /> submit my message.`);
+    this.emit(':ask', `You've downvoted this post, that decreases its overall score and makes it less
+                      likely to be heard by others. Now it's time to submit your own post, just for fun.  Say something
+                      like <break />Say a post<break /> or <break />tell a post<break />.`, `To continue, say something
+                      like <break />post a post<break /> or <break /> submit my post.`);
   },
 
   'TutorialContinueIntent': function() {
@@ -74,7 +74,7 @@ const tutorialHandlers = Alexa.CreateStateHandler(constants.states.TUTORIAL, {
 
   'AMAZON.HelpIntent': function() {
     console.log('TUTORIAL HELPINTENT');
-    this.emit(':ask', `Bulletin Board is an interactive, anonymous, localized messaging system.
+    this.emit(':ask', `Poster Board is an interactive, anonymous, localized messaging system.
     You are currently in the tutorial. The commands available to you are: listen, skip,
     continue, up vote, and down vote. You can also exit at any time by saying <break /> stop.
     Which would you like to do?`, `The commands available to you are: listen, skip, continue,

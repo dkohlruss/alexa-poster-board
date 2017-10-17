@@ -1,4 +1,4 @@
-const Alexa = require('alexa-sdk');
+PostPostconst Alexa = require('alexa-sdk');
 const _ = require('lodash');
 const constants = require('../constants/constants');
 const getId = require('../helpers/getId');
@@ -62,16 +62,16 @@ const listenHandlers = Alexa.CreateStateHandler(constants.states.LISTENING, {
             let quote = quotes[i].quote;
 
             this.handler.state = constants.states.VOTING;
-            this.emit(':ask', `Here is your Message: ${ping} ${quote} <break /> ${ping} <break />
-                        Would you like to upvote or downvote this message.`, `Would you like to upvote
-                        or downvote the message you just heard?`);
+            this.emit(':ask', `Here is your Post: ${ping} ${quote} <break /> ${ping} <break />
+                        Would you like to upvote or downvote this post.`, `Would you like to upvote
+                        or downvote the post you just heard?`);
             break;
           }
         }
         this.handler.state = constants.states.MAIN;
-        this.emit(':ask', `You've listened to all available messages.  Please try again later.  Main menu:
-                  Would you like to listen to a message, submit a message, or get help with additional options?`,
-                  `You can listen to a message, submit a message, or ask for help.`);
+        this.emit(':ask', `You've listened to all available posts.  Please try again later.  Main menu:
+                  Would you like to listen to a post, submit a post, or get help with additional options?`,
+                  `You can listen to a post, submit a post, or ask for help.`);
       }
     });
   },
@@ -102,8 +102,8 @@ const listenHandlers = Alexa.CreateStateHandler(constants.states.LISTENING, {
 
   'AMAZON.HelpIntent': function() {
     console.log('LISTENING HELPINTENT');
-    this.emit(':ask', `You are currently listening to messages. You can either listen to a
-              message, or return to the Main Menu.`, `The commands available to you are:
+    this.emit(':ask', `You are currently listening to posts. You can either listen to a
+              post, or return to the Main Menu.`, `The commands available to you are:
               listen, and main menu. You can exit at any time by saying: stop`);
   },
 

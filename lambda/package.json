@@ -1,7 +1,7 @@
 {
   "name": "anon-confessions",
   "version": "1.0.0",
-  "description": "Anonymous Confessions skill for Alexa",
+  "description": "Poster Board skill for Alexa",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -9,8 +9,6 @@
   "author": "David Kohlruss",
   "license": "ISC",
   "dependencies": {
-    "alexa-sdk": "^1.0.8",
-    "aws-sdk": "^2.32.0",
     "request": "^2.81.0",
     "request-promise": "^4.2.0"
   }
