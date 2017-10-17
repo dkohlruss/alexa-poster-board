@@ -1,14 +1,20 @@
-# Bort!
+# Poster Board v1.1
 
-Bort is an anonymous localized messaging skill developed for Amazon Alexa, which takes advantage of a reddit-like voting system to ensure users are fed the most popular and recent messages, or Borts, first.  
+Poster Board is an anonymous localized messaging skill developed for Amazon Alexa, which takes advantage of a reddit-like voting system to ensure users are fed the most popular and recent messages, or posts, first.  
 
-## What's a Bort?
+### Changelog
 
-A Bort can be anything that a user deems important to tell others in their area.  It can be a short bit of information about something happening in the area, or it can just be a silly joke or quip.  Borting is also a verb to describe the act of sending a Bort. Bort, incidentally, is also an incredibly popular name for children.
+**1.1**
+- Changed name and invocation name of skill to "Poster Board" to prevent collision with other skills with the identical name.  Now using a unique name.
+- Updated sample utterances for catchAll slot to accept recordings of posts using the 2 lines of 2 random words, 2 lines of 3 random words, up to 8 random words method in order to remove outdated catch-all methods from sample utterances
 
-## How to Bort
+## What's a Post?
 
-If you do not have an Alexa-enabled device, visit the [Alexa Skill Testing Tool](https://echosim.io) after enabling the Bort skill on your Amazon account.  State "Open Bort" to open your Bortal to the world of Borting.  You can work through an optional tutorial by following voice prompts which will lead you through Bort.
+A post can be anything that a user deems important to tell others in their area.  It can be a short bit of information about something happening in the area, or it can just be a silly joke or quip.  Posting is also a verb to describe the act of sending a post.
+
+## How to Post
+
+If you do not have an Alexa-enabled device, visit the [Alexa Skill Testing Tool](https://echosim.io).  State "Open Poster Board" to open your Bortal to the world of Borting.  Thanks to new features with Amazon Alexa which allow you to open any Skill without first enabling, doing so is no longer necessary, but still recommended!  You can work through an optional tutorial by following voice prompts which will instruct you how exactly to use Poster Board.
 
 ### About Me
 
