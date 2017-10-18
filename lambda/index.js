@@ -19,6 +19,7 @@ exports.handler = function(event, context, callback) {
   alexa.dynamoDBTableName = constants.dynamoDBTableName;
   console.log("APPID AND DBNAME SET...");
   console.log("REGISTERING HANDLERS");
+  // Each set of handles is tied to a state, found in the constants.js file
   alexa.registerHandlers(
     onboardingStateHandlers,
     tutorialHandlers,
