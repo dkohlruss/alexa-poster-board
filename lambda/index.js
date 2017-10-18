@@ -10,6 +10,8 @@ const votingHandlers = require('./handlers/votingHandlers');
 const recordingHandlers = require('./handlers/recordingHandlers');
 const savingHandlers = require('./handlers/savingHandlers');
 
+
+// Registering all Handler functions
 exports.handler = function(event, context, callback) {
   var alexa = Alexa.handler(event, context);
   console.log("ALEXA VAR SET...");

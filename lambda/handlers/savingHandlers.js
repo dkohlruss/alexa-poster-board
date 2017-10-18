@@ -31,19 +31,20 @@ const savingHandlers = Alexa.CreateStateHandler(constants.states.SAVING, {
       let lng = this.attributes['lng'];
       getId(1).then((newId) => {
         let params = {
-            Item: {
-                    'live': 'yes',
-                    'Id': newId,
-                    'quote': input,
-                    'ups': 1,
-                    'downs': 0,
-                    'date': Date.now(),
-                    'lat': lat,
-                    'lng': lng
-                },
-            TableName: constants.confessionDBTableName,
+              Item: {
+                      'live': 'yes',
+                      'Id': newId,
+                      'quote': input,
+                      'ups': 1,
+                      'downs': 0,
+                      'date': Date.now(),
+                      'lat': lat,
+                      'lng': lng
+                  },
+              TableName: constants.confessionDBTableName,
             };
 
+        // Saves the params object to the database and then calculates the "hotness" for a fresh post
         doc.put(params, (err, data) => {
             if (err) {
                 console.log('Put error: ' + JSON.stringify(err, null, 4));

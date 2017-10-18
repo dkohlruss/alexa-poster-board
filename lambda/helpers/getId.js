@@ -1,6 +1,7 @@
 const request = require('request-promise');
 const secrets = require('../constants/secrets');
 
+// Gets an ID # from a remote API for sequential identification of each post saved to the database
 const getId = function(increase) {
   console.log("GET ID");
   return new Promise((resolve, reject) => {

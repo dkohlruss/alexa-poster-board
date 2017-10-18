@@ -1,3 +1,4 @@
+// Takes in a location object representing user's location and exports an object with coordinates surrounding the user
 const setUserLocation = function(location) {
   console.log("SETTING USER LOCAITON");
   const radiusLat = 0.36; // Radius of ~50km from location.lat, at 40 latitude

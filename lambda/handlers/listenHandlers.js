@@ -1,7 +1,6 @@
-PostPostconst Alexa = require('alexa-sdk');
+const Alexa = require('alexa-sdk');
 const _ = require('lodash');
 const constants = require('../constants/constants');
-const getId = require('../helpers/getId');
 
 const ping = '<audio src="https://s3.amazonaws.com/dkohlruss/ping.mp3" />';
 
@@ -10,7 +9,6 @@ const AWS1 = require('aws-sdk');
 const doc = new AWS1.DynamoDB.DocumentClient({apiVersion: '2012-08-10'});
 
 const listenHandlers = Alexa.CreateStateHandler(constants.states.LISTENING, {
-
   'LaunchRequest': function() {
     console.log('LISTENING LAUNCHREQUEST');
     this.handler.state = constants.states.MAIN;
@@ -38,7 +36,7 @@ const listenHandlers = Alexa.CreateStateHandler(constants.states.LISTENING, {
       Limit: 50,
       ScanIndexForward: false
     }
-
+    // Queries the database with the set parameters (within the area between east & west longitudinal values)
     doc.query(params, (err, data) => {
       if (err) {
         console.log('Get error: ' + JSON.stringify(err, null, 4));
@@ -47,6 +45,7 @@ const listenHandlers = Alexa.CreateStateHandler(constants.states.LISTENING, {
         let latNorth = this.attributes['area'].north;
         let latSouth = this.attributes['area'].south;
 
+        // Filters the response (data) within the latitudinal values on the user object within the database and sorts them by the post's "hotness"
         quotes = _.filter(quotes, function(obj) {
               return (obj.lat <= latNorth && obj.lat >= latSouth);
             });

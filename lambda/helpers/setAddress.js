@@ -1,3 +1,4 @@
+// Takes in object representing address and formats it to a readable string
 const setAddress = function(addressObj) {
   console.log("SETTING ADDRESS...");
   let formattedAddress = '';

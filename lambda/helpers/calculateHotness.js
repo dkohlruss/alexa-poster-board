@@ -3,6 +3,7 @@ const constants = require('../constants/constants');
 const AWS = require('aws-sdk');
 const doc = new AWS.DynamoDB.DocumentClient({apiVersion: '2012-08-10'});
 
+// Calculates the "hotness" of a post, determining how often and in what order it is heard by a user
 const calculateHotness = function(data) {
   console.log("HOTNESS CALCULATED");
   let confessionNum = data.Attributes.Id;
