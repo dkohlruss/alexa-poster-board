@@ -2,6 +2,12 @@
 
 Poster Board is an anonymous localized messaging skill developed for Amazon Alexa, which takes advantage of a reddit-like voting system to ensure users are fed the most popular and recent messages, or posts, first.  
 
+### Video
+
+Here is a video example of the skill in use while in development under the project name "Bort".
+
+[![Poster Board](https://i.imgur.com/GhMeH4T.png)](https://www.youtube.com/watch?v=263e3FbNaJM)
+
 ### Changelog
 
 **1.1**
